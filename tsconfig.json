@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+      "target": "esnext",
+      "module": "commonjs", // Compile to CommonJS modules
+      "outDir": "./dist", // Output directory for compiled files
+      "esModuleInterop": true,
+
+      // Other compiler options...
+    },
+    "include": ["backend/**/*"],
+    "exclude": ["node_modules"]
+  }
