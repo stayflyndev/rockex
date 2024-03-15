@@ -5,7 +5,7 @@ import fetch from 'node-fetch';
 import cors from 'cors';
 require("dotenv").config()
 
-//setup express app and cors for xcross network
+//setup express app and cors for xcross network communciation
 const app = express();
 const PORT = process.env.PORT || 5000;
 let spacexData: any
@@ -13,7 +13,7 @@ let spacexData: any
 app.use(cors())
 app.use(bodyParser.json());
 
-//func for 
+//func for GET request 
 const getData = async () => {
   try {
     const response = await fetch('https://api.spacexdata.com/v5/launches');
@@ -28,7 +28,7 @@ const getData = async () => {
 }
 getData();
 
-// Define API
+// Define API calls made to 'api' route
 app.get('/api', (req: Request, res: Response) => {
   if(!spacexData){
    getData();
@@ -38,6 +38,6 @@ app.get('/api', (req: Request, res: Response) => {
 
 
 // Start the server
-app.listen(4000, () => {
+app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
