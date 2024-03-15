@@ -2,29 +2,42 @@
 import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import fetch from 'node-fetch';
+import cors from 'cors';
 require("dotenv").config()
 
+//setup express app and cors for xcross network
 const app = express();
 const PORT = process.env.PORT || 5000;
+let spacexData: any
 
+app.use(cors())
 app.use(bodyParser.json());
 
-// Define API
-app.get('/api/data', async (req: Request, res: Response) => {
+//func for 
+const getData = async () => {
   try {
     const response = await fetch('https://api.spacexdata.com/v5/launches');
     if (!response.ok) {
       throw new Error('Failed to fetch data from third-party API');
     }
-    const data = await response.json();
-    res.json(data);
+    spacexData = await response.json();
+
   } catch (error) {
-    console.error('Error fetching data from third-party API:', error);
-    res.status(500).json({ error: 'Failed to fetch data from third-party API' });
+    console.error('Error fetching data ', error);
   }
+}
+getData();
+
+// Define API
+app.get('/api', (req: Request, res: Response) => {
+  if(!spacexData){
+   getData();
+  }
+  res.json(spacexData || {error: Error})
 });
 
+
 // Start the server
-app.listen(PORT, () => {
+app.listen(4000, () => {
   console.log(`Server is running on port ${PORT}`);
 });
