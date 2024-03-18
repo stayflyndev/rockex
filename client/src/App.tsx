@@ -29,7 +29,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/api/`);
+        const response = await fetch(`https://rockex.onrender.com/api`);
         if (!response.ok) {
           throw new Error("Unable to get information at this time");
         }
