@@ -63,14 +63,33 @@ const App: React.FC = () => {
       )
     );
   });
-
+ 
   return (
     <div className="App">
       <Container className="container">
       <Row>
-        <Col>1 of 1</Col>
+        <Col><header style={{ paddingLeft: 0 }}>
+      <div
+        className='p-5 text-center bg-image'
+        style={{ backgroundImage: "url('https://images.pexels.com/photos/41162/moon-landing-apollo-11-nasa-buzz-aldrin-41162.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')", height: 400, backgroundSize: 'cover',
+        backgroundPosition: 'center top'}}
+      >
+        <div className='mask' style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
+          <div className='d-flex justify-content-center align-items-center h-100'>
+            <div className='text-white'>
+              <h1 className='mb-3'>Rocket Power</h1>
+              <h4 className='mb-3'>Go Crazy!</h4>
+              <a className='btn btn-outline-light btn-lg' href='github.com/stayflyndev' role='button'>
+                github
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    </Col>
       </Row>
-        <InputGroup onSubmit={handleSubmit}>
+        <InputGroup onSubmit={handleSubmit} className="input_field">
           <InputGroup.Text>Search</InputGroup.Text>
           <Form.Control
             as="textarea"
@@ -82,7 +101,7 @@ const App: React.FC = () => {
          
           {filteredData.map((item, index) => (
              <Col sm={3}>
-            <Card style={{ width: "18rem" }} key={index}>
+            <Card style={{ width: "18rem", paddingTop: "50px"}} key={index}>
               <Card.Img variant="top" src={item.links.patch.small} />
               <Card.Body>
                 <Card.Title>
