@@ -1,6 +1,7 @@
 import React, { useEffect, useState, ChangeEvent, FormEvent } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import Accordion from 'react-bootstrap/Accordion';
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import Card from "react-bootstrap/Card";
@@ -9,6 +10,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
+
 
 interface Rocket {
   name: string;
@@ -65,6 +67,9 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <Container className="container">
+      <Row>
+        <Col>1 of 1</Col>
+      </Row>
         <InputGroup onSubmit={handleSubmit}>
           <InputGroup.Text>Search</InputGroup.Text>
           <Form.Control
@@ -85,13 +90,23 @@ const App: React.FC = () => {
                   {JSON.stringify(item.name)}
                 </Card.Title>
                 <Card.Text>
-                  {item.success && <p> Succesful Launch Was Made! </p>}
+                  <div className="success_padding">
+                  {item.success ? (<p> Succesful Launch Was Made! </p>) : <p> Failure Happened</p>}
+                  </div>
+                  <div className="succss_padding"></div>
                 </Card.Text>
                 <Card.Text>
-                  {item.details}
+                <Accordion>
+      <Accordion.Item eventKey="0">
+        <Accordion.Header>Read Details</Accordion.Header>
+        <Accordion.Body>
+         {item.details}
+        </Accordion.Body>
+      </Accordion.Item>
+      </Accordion>
                 </Card.Text>
                 <Button variant="primary" href={item.links.wikipedia}>
-                  RocketWiki
+                  Read More..
                 </Button>
               </Card.Body>
             </Card>
